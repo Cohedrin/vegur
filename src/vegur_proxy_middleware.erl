@@ -182,12 +182,11 @@ parse_request(Body, Req) ->
 
 add_proxy_headers(Headers, Req) ->
     {Headers1, Req1} = add_request_id(Headers, Req),
-    {Headers2, Req2} = add_forwarded(Headers1, Req1),
-    {Headers3, Req3} = add_via(Headers2, Req2),
-    {Headers4, Req4} = add_connect_time(Headers3, Req3),
-    {Headers5, Req5} = add_start_time(Headers4, Req4),
-    {Headers6, Req6} = add_total_route_time(Headers5, Req5),
-    add_upstream_interface_headers(Headers6, Req6).
+    {Headers2, Req2} = add_via(Headers1, Req1),
+    {Headers3, Req3} = add_connect_time(Headers2, Req2),
+    {Headers4, Req4} = add_start_time(Headers3, Req3),
+    {Headers5, Req5} = add_total_route_time(Headers4, Req4),
+    add_upstream_interface_headers(Headers5, Req5).
 
 add_upstream_interface_headers(Headers, Req) ->
     {Log, Req1} = cowboyku_req:meta(logging, Req),
